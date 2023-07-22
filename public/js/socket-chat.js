@@ -15,7 +15,7 @@ socket.on('connect', function() {
     console.log('Conectado al servidor');
 
     socket.emit('entrarChat',usuario, function(resp){ //este callback es el que voy a recivbir de lo qeu me mande el server
-        console.log('Usuarios conectados: ' + resp)
+        console.log('Usuarios conectados: ' + JSON.stringify(resp))
     })
 });
 
@@ -36,8 +36,16 @@ socket.emit('enviarMensaje', {
 });
 
 // Escuchar información
-socket.on('enviarMensaje', function(mensaje) {
+socket.on('crearMensaje', function(mensaje) {
 
     console.log('Servidor:', mensaje);
+
+});
+
+//Escuchar cambios de usuario
+//Cuando un usario entra o sale del chat
+socket.on('listaPersona', function(personas) {
+
+    console.log('Servidor:', personas);
 
 });
