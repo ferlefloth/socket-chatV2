@@ -18,12 +18,12 @@ io.on('connection', (client) => {
 
         client.join(data.sala) // ingresa al cliente a la sala que quiere
 
-        let personas = usuarios.agregarPersona(client.id,data.nombre,data.sala)
+       usuarios.agregarPersona(client.id,data.nombre,data.sala)
 
         client.broadcast.to(data.para).emit('listaPersona', usuarios.getPersonasPorSala())
 
-        console.log(personas)
-        callback(personas)
+       
+        callback(usuarios.getPersonasPorSala(data.sala))
     })
 
     client.on('crearMensaje', (data)=>{
