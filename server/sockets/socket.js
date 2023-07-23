@@ -9,14 +9,18 @@ io.on('connection', (client) => {
 
     client.on('entrarChat', (data,callback)=>{
         
-        if( !data.nombre ){
+        console.log('la data es ', data)
+
+        if( !data.nombre || !data.sala){
             return callback({
                 error: true,
-                mensaje:'El nombre es necesario'
+                mensaje:'El nombre y/o la sala son necesarios'
             })
         } 
 
-        let personas = usuarios.agregarPersona(client.id,data.nombre)
+        client.join(data.sala) // ingresa al cliente a la sala que quiere
+
+        let personas = usuarios.agregarPersona(client.id,data.nombre,data.sala)
 
         client.broadcast.emit('listaPersona', usuarios.getPersonas())
 
