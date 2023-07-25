@@ -42,6 +42,7 @@ socket.on('disconnect', function() {
 
 // Escuchar información
 socket.on('crearMensaje', function(mensaje) {
+    console.log('aca')
     console.log('Servidor:', mensaje);
 });
 
