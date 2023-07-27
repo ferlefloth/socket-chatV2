@@ -71,6 +71,22 @@ function renderizarMensajes( mensaje, yo ){ //CHEQUEAR EN LA PRÓXIMA CLASE
     divChatbox.append(html);
 }
 
+function scrollBottom() {
+
+    // selectors
+    var newMessage = divChatbox.children('li:last-child');
+
+    // heights
+    var clientHeight = divChatbox.prop('clientHeight');
+    var scrollTop = divChatbox.prop('scrollTop');
+    var scrollHeight = divChatbox.prop('scrollHeight');
+    var newMessageHeight = newMessage.innerHeight();
+    var lastMessageHeight = newMessage.prev().innerHeight() || 0;
+
+    if (clientHeight + scrollTop + newMessageHeight + lastMessageHeight >= scrollHeight) {
+        divChatbox.scrollTop(scrollHeight);
+    }
+}
 
 
 
@@ -97,6 +113,8 @@ formEnviar.on('submit', function(e){
     }, function(mensaje) { //atención a los callback, noss siserven para ejecutar acciónes en el HTML
         console.log('Evidencia de ejecución del servidor en el CLIENTE: ' + JSON.stringify(mensaje))
       txtMensaje.val('').focus()
+      renderizarMensajes(mensaje,true)
+      scrollBottom()
     });
 
 })

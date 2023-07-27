@@ -44,6 +44,8 @@ socket.on('disconnect', function() {
 socket.on('crearMensaje', function(mensaje) {
     console.log('aca')
     console.log('Servidor:', mensaje);
+    renderizarMensajes(mensaje,false)
+    scrollBottom();
 });
 
 // Escuchar cambios de usuarios
